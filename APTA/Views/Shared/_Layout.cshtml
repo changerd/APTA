@@ -4,35 +4,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.apta.asia/" target="_blank">
+            <img src="~/Content/img/apta_logo.png" />        
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href=@Url.Action("Index", "Home")>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=@Url.Action("Index", "Conference")>Conferences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=@Url.Action("Index", "Member")>Members</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=@Url.Action("Index", "Organization")>Organizations</a>
+                </li>
+
+            </ul>
+            
         </div>
-    </div>
+    </div>    
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <p class="text-center">&copy; APTA (Asia Pacific Tourism Association)</p>
         </footer>
     </div>
 

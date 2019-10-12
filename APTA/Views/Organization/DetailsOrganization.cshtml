@@ -1,0 +1,49 @@
+﻿@model APTA.Models.Organization
+
+@{
+    ViewBag.Title = "Details Organization";
+}
+
+<h2>Organization Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationEmail)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditOrganization", new { id = Model.OrganizationId }, new { @class = "btn btn-dark" })
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-dark" })
+</p>

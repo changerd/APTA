@@ -11,15 +11,17 @@ namespace APTA.Models
         public int ConferenceId { get; set; }
         [Required]
         [Display(Name = "Conference Name")]
-        public string ConferencenName { get; set; }
+        public string ConferenceName { get; set; }
         [Required]
         [Display(Name = "Conference Description")]
         public string ConferenceDescription { get; set; }
         [Required]
         [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]        
         public DateTime ConferenceDateStart { get; set; }
         [Required]
         [Display(Name = "Finish Date")]
+        [DataType(DataType.Date)]        
         public DateTime ConferenceDateEnd { get; set; }
 
         [Display(Name = "Co-Hosting Organization")]

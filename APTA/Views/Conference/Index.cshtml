@@ -1,0 +1,64 @@
+﻿@model IEnumerable<APTA.Models.Conference>
+
+@{
+    ViewBag.Title = "List of Conferences";
+}
+
+<h2>List of Conferences</h2>
+
+<p>
+    @Html.ActionLink("Create New Conference", "CreateConference", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ConferenceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConferenceDateStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConferenceDateEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationId)
+        </th>
+        <th>
+            @Html.DisplayName("Events")
+        </th>
+        <th>
+            @Html.DisplayName("Members")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConferenceName)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.ConferenceDateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConferenceDateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
+            </td>
+            <td>
+                @Html.Display(item.Events.Count.ToString())
+            </td>
+            <td>
+                @Html.Display(item.Members.Count.ToString())
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditConference", new { id = item.ConferenceId }) |
+                @Html.ActionLink("Details", "DetailsConference", new { id = item.ConferenceId }) |
+                @Html.ActionLink("Delete", "DeleteConference", new { id = item.ConferenceId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,57 @@
+﻿@model APTA.Models.Member
+
+@{
+    ViewBag.Title = "DetailsM ember";
+}
+
+<h2>Details of Member @Model.MemberFirstName @Model.MemberLastName</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberRegistrationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberRegistrationDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditMember", new { id = Model.MemberId }, new { @class = "btn btn-dark" }) 
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-dark" })
+</p>

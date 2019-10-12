@@ -23,6 +23,7 @@ namespace APTA.Models
         [Display(Name = "E-mail")]
         [DataType(DataType.EmailAddress)]
         public string MemberEmail { get; set; }
+        [Display(Name = "Date of Registration")]
         public DateTime MemberRegistrationDate { get; set; }
 
         public virtual ICollection<Conference> Conferences { get; set; }

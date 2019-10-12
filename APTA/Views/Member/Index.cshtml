@@ -1,0 +1,58 @@
+﻿@model IEnumerable<APTA.Models.Member>
+
+@{
+    ViewBag.Title = "List of Members";
+}
+
+<h2>List of Members</h2>
+
+<p>
+    @Html.ActionLink("Add New Member", "CreateMember", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberRegistrationDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberRegistrationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditMember", new { id = item.MemberId }) |
+                @Html.ActionLink("Details", "DetailsMember", new { id = item.MemberId }) |
+                @Html.ActionLink("Delete", "DeleteMember", new { id = item.MemberId })
+            </td>
+        </tr>
+    }
+
+</table>
