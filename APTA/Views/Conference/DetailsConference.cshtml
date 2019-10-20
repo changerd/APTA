@@ -1,0 +1,124 @@
+﻿@model APTA.Models.Conference
+
+@{
+    ViewBag.Title = Model.ConferenceName;
+}
+
+<h2>@Model.ConferenceName</h2>
+<h3>@Model.ConferenceDateStart.ToShortDateString()-@Model.ConferenceDateEnd.ToShortDateString()</h3>
+<h3>@Model.ConferenceDescription</h3>
+
+<div>
+    <hr />
+    <p>
+        @Html.ActionLink("Add New Event", "CreateEvent", new { id = Model.ConferenceId }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Add New Member", "AddMember", new { id = Model.ConferenceId }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Edit", "EditConference", new { id = Model.ConferenceId }, new { @class = "btn btn-dark" })
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-dark" })
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationId):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organization.OrganizationName)
+        </dd>
+        <dd>
+            <b>Adress:</b> @Html.DisplayFor(model => model.Organization.OrganizationAddress)
+        </dd>
+        <dd>
+            <b>Phone:</b> @Html.DisplayFor(model => model.Organization.OrganizationPhone)
+        </dd>
+        <dd>
+            <b>E-mail:</b> @Html.DisplayFor(model => model.Organization.OrganizationEmail)
+        </dd>
+    </dl>
+    <ul class="nav nav-tabs" id="ConfereceTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="true">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="false">Members</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="ConferenceTabContent">
+        <div class="tab-pane fade show active" id="events" role="tabpanel" aria-labelledby="events-tab">
+            <table class="table">
+                <tbody>
+                    @foreach (var item in Model.Events.OrderBy(d => d.EventStart))
+                    {
+                        <tr>
+                            <td>@item.EventStart.ToShortDateString() @item.EventStart.ToShortTimeString()-@item.EventEnd.ToShortTimeString()</td>
+                            <td>@item.EventName</td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditEvent", new { id = item.EventId }) |
+                                @Html.ActionLink("Delete", "DeleteEvent", new { id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">E-mail</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model.Members.OrderBy(n => n.MemberFirstName))
+                    {
+                        <tr>
+                            <td><a href=@Url.Action("DetailsMember", "Member", new { id = m.MemberId })>@m.MemberFirstName @m.MemberLastName</a></td>
+                            <td>@m.MemberPhone</td>
+                            <td>@m.MemberEmail</td>
+                            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteMemberModal" onclick="DeleteMember('@m.MemberId', '@Model.ConferenceId')">Delete</button></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this Member?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @using (Html.BeginForm("DeleteMember", "Conference", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="mid" name="mid" value="" />
+                    <input type="hidden" id="cid" name="cid" value="" />
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function DeleteMember(mId, cId) {            
+            $('#mid').val(mId);
+            $('#cid').val(cId)
+        }
+    </script>
+}

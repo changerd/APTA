@@ -1,0 +1,64 @@
+﻿@using APTA.Models
+@model APTA.Models.Conference
+
+@{
+    ViewBag.Title = "Add Members";
+}
+
+<h2>Add Member to Conference @Model.ConferenceName</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ConferenceId)
+     
+    @Html.AntiForgeryToken()
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Members != null)
+            {
+                foreach (Member m in ViewBag.Members)
+                {
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="selectedMembers" value="@m.MemberId" @(Model.Members.Contains(m) ? "checked=\"checked\"" : "") /></th>
+                        <td>@m.MemberFirstName @m.MemberLastName</td>
+                        <td>@m.MemberPhone</td>
+                        <td>@m.MemberEmail</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                foreach (Member m in ViewBag.Members)
+                {
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="selectedMembers" value="@m.MemberId" @*@(Model.Members.Contains(g) ? "checked=\"checked\"" : "")*@ /></th>
+                        <td>@m.MemberFirstName @m.MemberLastName</td>
+                        <td>@m.MemberPhone</td>
+                        <td>@m.MemberEmail</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success" />
+            @Html.ActionLink("Back", "DetailsConference", new { id = Model.ConferenceId }, new { @class = "btn btn-dark" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

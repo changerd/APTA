@@ -14,9 +14,10 @@ namespace APTA.Models
         public string EventName { get; set; }
         [Required]
         [Display(Name = "Start Date and Time")]
+        [DataType(DataType.DateTime)]
         public DateTime EventStart { get; set; }
-        [Required]
         [Display(Name = "Finish Date and Time")]
+        [DataType(DataType.DateTime)]
         public DateTime EventEnd { get; set; }
 
         public int ConferenceId { get; set; }

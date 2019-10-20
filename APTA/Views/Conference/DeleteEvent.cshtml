@@ -1,0 +1,19 @@
+﻿@model APTA.Models.Event
+
+@{
+    ViewBag.Title = "Delete Event";
+}
+
+<h3>Are you sure you want to delete this Event: <b>@Model.EventName</b>?</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Back", "DetailsConference", new { id = Model.ConferenceId}, new { @class = "btn btn-dark" })
+    </div>
+}
+

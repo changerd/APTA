@@ -15,7 +15,7 @@ namespace APTA.Controllers
         // GET: Members list
         public async Task<ActionResult> Index()
         {
-            return View(await _context.Members.ToListAsync());
+            return View(await _context.Members.Include(c => c.Conferences).ToListAsync());
         }
         public ActionResult CreateMember()
         {
@@ -70,7 +70,7 @@ namespace APTA.Controllers
         }
         public async Task<ActionResult> DetailsMember(int id = 0)
         {
-            var member = await _context.Members.FindAsync(id);
+            var member = await _context.Members.Include(c => c.Conferences).SingleOrDefaultAsync(i => i.MemberId == id);
             if (member == null || id == 0)
                 return HttpNotFound();
             return View(member);

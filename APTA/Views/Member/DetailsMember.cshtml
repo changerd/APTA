@@ -50,6 +50,56 @@
         </dd>
 
     </dl>
+    <hr />
+    <h3>Membership in Conferences:</h3>
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Conference Name")
+            </th>
+            <th>
+                @Html.DisplayName("Start Date")
+            </th>
+            <th>
+                @Html.DisplayName("Finish Date")
+            </th>
+            <th>
+                @Html.DisplayName("Co-Hosting Organization")
+            </th>
+            <th>
+                @Html.DisplayName("Events")
+            </th>
+            <th>
+                @Html.DisplayName("Members")
+            </th>            
+        </tr>
+
+        @foreach (var item in Model.Conferences)
+        {
+            <tr>
+                <td>
+                    <a href=@Url.Action("DetailsConference", "Conference", new { id = item.ConferenceId })>@Html.DisplayFor(modelItem => item.ConferenceName)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConferenceDateStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConferenceDateEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
+                </td>
+                <td>
+                    @item.Events.Count
+                </td>
+                <td>
+                    @item.Members.Count
+                </td>                
+            </tr>
+        }
+
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "EditMember", new { id = Model.MemberId }, new { @class = "btn btn-dark" }) 

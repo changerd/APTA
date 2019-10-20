@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.MemberRegistrationDate)
         </th>
+        <th>
+            Membership
+        </th>
         <th></th>
     </tr>
 
@@ -46,6 +49,14 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MemberRegistrationDate)
+            </td>
+            <td>
+                <ul>
+                    @foreach (var c in item.Conferences)
+                    {
+                        <li>@c.ConferenceName</li>
+                    }
+                </ul>
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditMember", new { id = item.MemberId }) |
